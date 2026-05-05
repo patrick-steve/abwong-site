@@ -115,18 +115,16 @@ export default function PeopleContent() {
 
           {/* Bio panel */}
           <div className="px-16 py-20 pt-[100px] flex flex-col justify-center">
-            <div className="flex items-center gap-3 mb-5">
+            <h1 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(36px,4vw,60px)] text-[var(--ink)] leading-[1.0] tracking-[-0.02em] mb-5">
+              Prof. Andrew B. <em className="italic font-normal text-[var(--gold)]">Wong</em>
+            </h1>
+
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-[var(--gold)]"/>
               <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
-                Principal Investigator
+                Principal Investigator · NUS Dept. of MSE
               </span>
             </div>
-
-            <h1 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(32px,3.5vw,52px)] text-[var(--ink)] leading-[1.1] tracking-[-0.01em] mb-8">
-              Advancing the frontier of
-              <br/>
-              <em className="italic font-normal text-[var(--gold)]">clean energy.</em>
-            </h1>
 
             <p className="font-[family-name:var(--font-inter)] font-light text-[15px] text-[var(--ink-dim)] leading-[1.85] mb-5">
               Prof. Andrew B. Wong is an Assistant Professor in the Department of Materials Science and Engineering at the National University of Singapore. His research sits at the intersection of electrochemistry and materials synthesis, with a focus on developing novel routes for electrochemical CO₂ conversion and sustainable energy materials.
