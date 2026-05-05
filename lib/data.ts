@@ -53,13 +53,66 @@ export const NEWS = [
   { date: "Aug 2024", title: "New PhD Students Joined", body: "Three new PhD students join the group to work on CO₂ conversion and perovskite materials." },
 ];
 
-export const TEAM = [
-  { name: "Andrew B. Wong", role: "Principal Investigator", sub: "Assistant Professor, NUS MSE", init: "AW", pi: true },
-  { name: "Li Xuan", role: "PhD Student", sub: "CO₂ Electroreduction", init: "LX" },
-  { name: "Park Jiyeon", role: "PhD Student", sub: "Bio-Hybrid Systems", init: "PJ" },
-  { name: "Chen Yiming", role: "Research Fellow", sub: "Perovskite Materials", init: "CY" },
-  { name: "Kim Soohyun", role: "PhD Student", sub: "Molten Salt Systems", init: "KS" },
-  { name: "Tan Wei", role: "Research Assistant", sub: "Electrochemistry", init: "TW" },
+export const POSTDOCS = [
+  { name: "Shaohai LI",  init: "SL", since: "Oct 2023", phd: "Fuzhou University",                       focus: "CO₂ reduction" },
+  { name: "Jie CHENG",   init: "JC", since: "Jan 2024", phd: "Zhejiang University",                     focus: "Bioelectrochemistry CO₂ reduction" },
+  { name: "Tian WANG",   init: "TW", since: "Apr 2024", phd: "National University of Singapore",        focus: "CO₂ reduction" },
+  { name: "Shuyi KONG",  init: "SK", since: "Nov 2024", phd: "University of Chinese Academy of Sciences", focus: "CO₂ reduction" },
+];
+
+export const PHD_STUDENTS = [
+  { name: "Yukun HU",     init: "YH", since: "Aug 2021", prev: "M.S. Beihang University, China",        focus: "CO₂ reduction" },
+  { name: "Panpan ZHANG", init: "PZ", since: "Aug 2021", prev: "M.S. Fudan University, China",          focus: "Bioelectrochemical N₂ and CO₂ fixation" },
+  { name: "Caiwei ZHANG", init: "CZ", since: "Aug 2021", prev: "B.S. Southeast University, China",      focus: "CO₂ reduction" },
+  { name: "Cheng FANG",   init: "CF", since: "Aug 2022", prev: "M.S. UC Berkeley, USA",                 focus: "CO₂ reduction in molten salt electrolytes" },
+];
+
+export const COADV_STUDENTS = [
+  { name: "Guangxin SUN",  init: "GS", since: "Aug 2020", prev: "M.S. Beihang University, China",    focus: "CO₂ reduction" },
+  { name: "Chaolong WEI",  init: "CW", since: "Aug 2021", prev: "M.S. Nanchang University, China",   focus: "CO₂ reduction" },
+  { name: "Tao LIU",       init: "TL", since: "Aug 2021", prev: "M.S. Tianjin University, China",    focus: "CO₂ reduction" },
+];
+
+export const ALUMNI = [
+  {
+    group: "PhD & Postdoc",
+    members: [
+      { name: "Chunyang CHI",  role: "PhD student & Research Engineer", tenure: "2020.8 – 2024.11" },
+      { name: "Fei YU",        role: "PhD student & Postdoc",           tenure: "2020.1 – 2024.9"  },
+      { name: "Yaqi CHENG",    role: "Postdoc",                         tenure: "2021.8 – 2023.12" },
+      { name: "Gamze YILMAZ",  role: "Postdoc",                         tenure: "2020.1 – 2021.5"  },
+    ],
+  },
+  {
+    group: "Masters",
+    members: [
+      { name: "Xinyi LYU",       role: "Masters", tenure: "2023.9 – 2024.5" },
+      { name: "Hanyu DENG",      role: "Masters", tenure: "2023.9 – 2024.5" },
+      { name: "Chunyang SONG",   role: "Masters", tenure: "2022.8 – 2023.5" },
+      { name: "Zhihao ZHANG",    role: "Masters", tenure: "2022.8 – 2023.5" },
+      { name: "Manxi ZHOU",      role: "Masters", tenure: "2022.8 – 2023.5" },
+      { name: "Yuxin LIU",       role: "Masters", tenure: "2022.8 – 2023.5" },
+      { name: "Tianyu LI",       role: "Masters & Research Engineer",    tenure: "2021.1 – 2023.1" },
+      { name: "Chao YAN",        role: "Masters", tenure: "2021.1 – 2022.1" },
+    ],
+  },
+  {
+    group: "Undergraduate",
+    members: [
+      { name: "Phein Shein SIM",              role: "Undergraduate", tenure: "2023.1 – 2023.12" },
+      { name: "Yuming SUN",                   role: "Undergraduate", tenure: "2022.8 – 2023.5"  },
+      { name: "Muhammad Iskandar B Salaman",  role: "Undergraduate", tenure: "2021.8 – 2022.11" },
+      { name: "Ee Jet TAN",                   role: "Undergraduate", tenure: "2021.8 – 2022.11" },
+      { name: "Changxing WANG",               role: "Undergraduate", tenure: "2021.8 – 2021.11" },
+      { name: "Navneeth RAJIV",               role: "Undergraduate", tenure: "2020.4 – 2021.4"  },
+      { name: "Yuejuan YU",                   role: "Undergraduate", tenure: "2020.8 – 2021.5"  },
+      { name: "Fong CHENG HUNG",              role: "Undergraduate", tenure: "2021.1 – 2021.11" },
+      { name: "Ting XUAN",                    role: "Undergraduate", tenure: "2020.8 – 2021.5"  },
+      { name: "Jin Yuan Joshua QUEK",         role: "Undergraduate", tenure: "2020.8 – 2021.1"  },
+      { name: "Jordan LOW HANLIN",            role: "Undergraduate", tenure: "2020.8 – 2021.1"  },
+      { name: "Jing Wen Valerie NAM",         role: "Undergraduate", tenure: "2020.8 – 2021.1"  },
+    ],
+  },
 ];
 
 export const POSITIONS = [

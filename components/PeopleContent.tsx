@@ -1,95 +1,261 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import SectionHeader from "./SectionHeader";
-import { TEAM } from "@/lib/data";
+import { POSTDOCS, PHD_STUDENTS, COADV_STUDENTS, ALUMNI } from "@/lib/data";
+
+// ── Reusable member card ─────────────────────────────────────────────────────
+function MemberCard({
+  name, init, since, focus, sub,
+}: {
+  name: string; init: string; since: string; focus: string; sub: string;
+}) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      className="relative flex flex-col p-8 border border-[var(--border)] transition-all duration-300 overflow-hidden cursor-default"
+      style={{ background: hov ? "var(--surface)" : "var(--cream)" }}
+    >
+      {/* Gold left accent bar */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-0.5 bg-[var(--gold)] transition-transform duration-300 origin-top"
+        style={{ transform: hov ? "scaleY(1)" : "scaleY(0)" }}
+      />
+      {/* Initials box */}
+      <div
+        className="w-12 h-12 border flex items-center justify-center mb-6 transition-colors duration-300 shrink-0"
+        style={{ borderColor: hov ? "var(--gold)" : "var(--border-bright)" }}
+      >
+        <span
+          className="font-[family-name:var(--font-playfair)] text-[18px] tracking-[0.05em] transition-colors duration-300"
+          style={{ color: hov ? "var(--gold)" : "var(--ink-dim)" }}
+        >
+          {init}
+        </span>
+      </div>
+      {/* Name */}
+      <div className="font-[family-name:var(--font-playfair)] text-[20px] text-[var(--ink)] leading-[1.2] tracking-[0.01em] mb-1">
+        {name}
+      </div>
+      {/* Sub-role */}
+      <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--gold)] tracking-[0.14em] uppercase mb-3">
+        {sub}
+      </div>
+      {/* Focus */}
+      <div className="font-[family-name:var(--font-inter)] font-light text-[13px] text-[var(--ink-dim)] leading-[1.6] mb-4 flex-1">
+        {focus}
+      </div>
+      {/* Since */}
+      <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.1em]">
+        Since {since}
+      </div>
+    </div>
+  );
+}
+
+// ── Section label ────────────────────────────────────────────────────────────
+function GroupLabel({ label, count }: { label: string; count: number }) {
+  return (
+    <div className="flex items-center gap-5 mb-8">
+      <div className="w-6 h-px bg-[var(--gold)]" />
+      <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
+        {label}
+      </span>
+      <span className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.1em]">
+        — {count}
+      </span>
+      <div className="flex-1 h-px bg-[var(--border)]" />
+    </div>
+  );
+}
 
 export default function PeopleContent() {
-  const [hov, setHov] = useState<number | null>(null);
-  const pi = TEAM.find((m) => m.pi)!;
-  const members = TEAM.filter((m) => !m.pi);
-
   return (
-    <div className="bg-[var(--cream)] min-h-screen pt-[80px]">
-      <div className="px-20 py-20 pb-[120px]">
-        <SectionHeader label="People" title="The" accent="Team" />
+    <div className="bg-[var(--cream)]">
 
-        {/* PI Feature Row */}
-        <div
-          className="grid gap-10 items-center border-t border-b border-[var(--border)] py-12 mb-20"
-          style={{ gridTemplateColumns: "80px 1fr auto" }}
-        >
-          <div className="w-20 h-20 border border-[var(--gold)] flex items-center justify-center">
-            <span className="font-[family-name:var(--font-playfair)] text-[28px] text-[var(--gold)] tracking-[0.05em]">
-              {pi.init}
-            </span>
+      {/* ── PI Section ────────────────────────────────────────────────────── */}
+      <section className="border-b border-[var(--border)]">
+        <div className="grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
+
+          {/* Photo panel — dark */}
+          <div className="relative bg-[var(--hero-bg)] min-h-[600px] overflow-hidden">
+            {/* Noise */}
+            <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+              <filter id="pin">
+                <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+                <feColorMatrix type="saturate" values="0"/>
+              </filter>
+              <rect width="100%" height="100%" filter="url(#pin)"/>
+            </svg>
+            {/* Gold glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgba(138,106,42,0.1)_0%,transparent_65%)]"/>
+            {/* Photo */}
+            <Image
+              src="/prof-wong.png"
+              alt="Prof. Andrew B. Wong"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+            {/* Gradient overlay at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[rgba(10,9,8,0.85)] to-transparent"/>
+            {/* Name overlay */}
+            <div className="absolute bottom-0 left-0 right-0 px-10 py-8">
+              <div className="font-[family-name:var(--font-playfair)] font-medium text-[28px] text-white leading-none mb-2">
+                Prof. Andrew B. Wong
+              </div>
+              <div className="font-[family-name:var(--font-inter)] text-[10px] text-[rgba(200,170,100,0.85)] tracking-[0.18em] uppercase">
+                Principal Investigator
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--gold)] tracking-[0.15em] uppercase mb-2.5">
-              Principal Investigator
+
+          {/* Bio panel */}
+          <div className="px-16 py-20 pt-[100px] flex flex-col justify-center">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[var(--gold)]"/>
+              <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
+                Principal Investigator
+              </span>
             </div>
-            <div className="font-[family-name:var(--font-playfair)] text-[40px] text-[var(--ink)] tracking-[0.02em] leading-none">
-              Prof. {pi.name}
+
+            <h1 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(32px,3.5vw,52px)] text-[var(--ink)] leading-[1.1] tracking-[-0.01em] mb-8">
+              Advancing the frontier of
+              <br/>
+              <em className="italic font-normal text-[var(--gold)]">clean energy.</em>
+            </h1>
+
+            <p className="font-[family-name:var(--font-inter)] font-light text-[15px] text-[var(--ink-dim)] leading-[1.85] mb-5">
+              Prof. Andrew B. Wong is an Assistant Professor in the Department of Materials Science and Engineering at the National University of Singapore. His research sits at the intersection of electrochemistry and materials synthesis, with a focus on developing novel routes for electrochemical CO₂ conversion and sustainable energy materials.
+            </p>
+            <p className="font-[family-name:var(--font-inter)] font-light text-[15px] text-[var(--ink-dim)] leading-[1.85] mb-10">
+              He received his PhD from UC Berkeley and completed postdoctoral training before joining NUS in 2021. His group combines expertise in rational material synthesis, electrocatalysis, and device engineering.
+            </p>
+
+            {/* Credentials row */}
+            <div className="grid grid-cols-3 border-t border-[var(--border)] pt-8 gap-6">
+              {[
+                { label: "Affiliation", val: "NUS, Dept. of MSE" },
+                { label: "PhD", val: "UC Berkeley" },
+                { label: "Joined NUS", val: "2021" },
+              ].map(({ label, val }) => (
+                <div key={label}>
+                  <div className="font-[family-name:var(--font-inter)] font-medium text-[9px] text-[var(--gold)] tracking-[0.15em] uppercase mb-1.5">
+                    {label}
+                  </div>
+                  <div className="font-[family-name:var(--font-inter)] text-[14px] text-[var(--ink)] leading-[1.4]">
+                    {val}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="font-[family-name:var(--font-inter)] font-light text-[14px] text-[var(--ink-dim)] mt-2">
-              {pi.sub}
-            </div>
-          </div>
-          <div className="flex flex-col gap-2 items-end">
+
             <a
               href="mailto:mseabw@nus.edu.sg"
-              className="font-[family-name:var(--font-inter)] text-[12px] text-[var(--gold)] tracking-[0.06em] no-underline hover:opacity-70 transition-opacity"
+              className="inline-flex items-center gap-3 mt-8 font-[family-name:var(--font-inter)] text-[12px] text-[var(--gold)] tracking-[0.08em] no-underline border-b border-[rgba(138,106,42,0.3)] pb-[3px] hover:border-[var(--gold)] transition-all self-start"
             >
-              mseabw@nus.edu.sg
+              mseabw@nus.edu.sg →
             </a>
-            <span className="font-[family-name:var(--font-inter)] text-[11px] text-[var(--ink-dim)] tracking-[0.06em]">
-              +65 6601 5389
+          </div>
+        </div>
+      </section>
+
+      {/* ── Group Members ─────────────────────────────────────────────────── */}
+      <section className="px-20 py-20 border-b border-[var(--border)]">
+        {/* Section heading */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-8 h-px bg-[var(--gold)]"/>
+            <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
+              Group Members
             </span>
+          </div>
+          <h2 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(32px,4vw,56px)] text-[var(--ink)] leading-[1.05] tracking-[-0.01em]">
+            The <em className="italic font-normal text-[var(--gold)]">Team</em>
+          </h2>
+        </div>
+
+        {/* Postdocs */}
+        <div className="mb-14">
+          <GroupLabel label="Postdoctoral Researchers" count={POSTDOCS.length}/>
+          <div className="grid gap-px bg-[var(--border)]" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+            {POSTDOCS.map(m => (
+              <MemberCard key={m.name} name={m.name} init={m.init} since={m.since} focus={m.focus} sub={`PhD · ${m.phd}`}/>
+            ))}
           </div>
         </div>
 
-        {/* Group Members */}
-        <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.15em] uppercase mb-8">
-          Group Members
+        {/* PhD Students */}
+        <div className="mb-14">
+          <GroupLabel label="PhD Students" count={PHD_STUDENTS.length}/>
+          <div className="grid gap-px bg-[var(--border)]" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+            {PHD_STUDENTS.map(m => (
+              <MemberCard key={m.name} name={m.name} init={m.init} since={m.since} focus={m.focus} sub={m.prev}/>
+            ))}
+          </div>
         </div>
-        <div className="grid gap-px bg-[var(--border)]" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
-          {members.map((m, i) => (
-            <div
-              key={m.name}
-              onMouseEnter={() => setHov(i)}
-              onMouseLeave={() => setHov(null)}
-              className="relative px-7 py-8 transition-colors duration-200 overflow-hidden"
-              style={{ background: hov === i ? "var(--surface)" : "var(--cream)" }}
-            >
-              {/* Gold bottom bar */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--gold)] transition-transform duration-300 origin-left"
-                style={{ transform: hov === i ? "scaleX(1)" : "scaleX(0)" }}
-              />
-              <div
-                className="w-11 h-11 border flex items-center justify-center mb-5 transition-colors duration-200"
-                style={{ borderColor: hov === i ? "var(--gold)" : "var(--border-bright)" }}
-              >
-                <span
-                  className="font-[family-name:var(--font-playfair)] text-[18px] tracking-[0.05em] transition-colors duration-200"
-                  style={{ color: hov === i ? "var(--gold)" : "var(--ink-dim)" }}
-                >
-                  {m.init}
-                </span>
+
+        {/* Co-advised */}
+        <div>
+          <GroupLabel label="Co-advised PhD Students" count={COADV_STUDENTS.length}/>
+          <p className="font-[family-name:var(--font-inter)] font-light text-[12px] text-[var(--ink-faint)] tracking-[0.05em] mb-6 -mt-2">
+            Joint program with Prof. Chunnian HE
+          </p>
+          <div className="grid gap-px bg-[var(--border)]" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
+            {COADV_STUDENTS.map(m => (
+              <MemberCard key={m.name} name={m.name} init={m.init} since={m.since} focus={m.focus} sub={m.prev}/>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Alumni ────────────────────────────────────────────────────────── */}
+      <section className="bg-[var(--surface)] px-20 py-20">
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-8 h-px bg-[var(--gold)]"/>
+            <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
+              Alumni
+            </span>
+          </div>
+          <h2 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(32px,4vw,56px)] text-[var(--ink)] leading-[1.05] tracking-[-0.01em]">
+            Former <em className="italic font-normal text-[var(--gold)]">Members</em>
+          </h2>
+        </div>
+
+        <div className="grid gap-16" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
+          {ALUMNI.map(({ group, members }) => (
+            <div key={group}>
+              <div className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.18em] uppercase mb-6 pb-3 border-b border-[var(--border)]">
+                {group}
               </div>
-              <div className="font-[family-name:var(--font-playfair)] text-[22px] text-[var(--ink)] tracking-[0.02em] mb-1">
-                {m.name}
-              </div>
-              <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--gold)] tracking-[0.1em] uppercase mb-1.5">
-                {m.role}
-              </div>
-              <div className="font-[family-name:var(--font-inter)] font-light text-[13px] text-[var(--ink-dim)]">
-                {m.sub}
+              <div className="flex flex-col gap-0">
+                {members.map((m, i) => (
+                  <div
+                    key={m.name}
+                    className="flex justify-between items-baseline py-3.5 border-b border-[var(--border)] gap-4"
+                  >
+                    <div>
+                      <div className="font-[family-name:var(--font-inter)] font-normal text-[14px] text-[var(--ink)] leading-[1.3]">
+                        {m.name}
+                      </div>
+                      <div className="font-[family-name:var(--font-inter)] font-light text-[11px] text-[var(--ink-faint)] mt-0.5">
+                        {m.role}
+                      </div>
+                    </div>
+                    <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.05em] whitespace-nowrap shrink-0">
+                      {m.tenure}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
+
     </div>
   );
 }
