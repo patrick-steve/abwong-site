@@ -79,8 +79,8 @@ export default function PeopleContent() {
       <section className="border-b border-[var(--border)]">
         <div className="grid" style={{ gridTemplateColumns: "420px 1fr" }}>
 
-          {/* Photo panel — natural portrait height, no cropping */}
-          <div className="relative bg-[var(--hero-bg)] overflow-hidden self-stretch">
+          {/* Photo panel — fills full grid row height, object-cover from top */}
+          <div className="relative bg-[var(--hero-bg)] overflow-hidden" style={{ minHeight: "100%" }}>
             {/* Noise */}
             <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
               <filter id="pin">
@@ -91,23 +91,21 @@ export default function PeopleContent() {
             </svg>
             {/* Gold glow */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(138,106,42,0.1)_0%,transparent_65%)] pointer-events-none"/>
-            {/* Photo — rendered at natural portrait ratio, full image visible */}
+            {/* Photo */}
             <Image
               src="/prof-wong.png"
               alt="Prof. Andrew B. Wong"
-              width={0}
-              height={0}
-              sizes="420px"
-              className="w-full h-auto block"
+              fill
+              className="object-cover object-top"
               priority
             />
-            {/* Gradient + name overlay pinned to bottom of image */}
-            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[rgba(10,9,8,0.92)] to-transparent"/>
+            {/* Gradient overlay */}
+            <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[rgba(10,9,8,0.92)] to-transparent"/>
             <div className="absolute bottom-0 left-0 right-0 px-8 py-7">
-              <div className="font-[family-name:var(--font-playfair)] font-medium text-[24px] text-white leading-none mb-2">
+              <div className="font-[family-name:var(--font-playfair)] font-medium text-[22px] text-white leading-none mb-1.5">
                 Prof. Andrew B. Wong
               </div>
-              <div className="font-[family-name:var(--font-inter)] text-[10px] text-[rgba(200,170,100,0.85)] tracking-[0.18em] uppercase">
+              <div className="font-[family-name:var(--font-inter)] text-[9px] text-[rgba(200,170,100,0.8)] tracking-[0.16em] uppercase">
                 Principal Investigator
               </div>
             </div>
@@ -119,15 +117,23 @@ export default function PeopleContent() {
               Prof. Andrew B. <em className="italic font-normal text-[var(--gold)]">Wong</em>
             </h1>
 
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-px bg-[var(--gold)]"/>
-              <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
-                Principal Investigator · NUS Dept. of MSE
-              </span>
+            <div className="flex flex-col gap-2 mb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-px bg-[var(--gold)]"/>
+                <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
+                  Principal Investigator · NUS Dept. of MSE
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-px bg-[var(--gold-dim)]"/>
+                <span className="font-[family-name:var(--font-inter)] font-medium text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase opacity-75">
+                  NUS Presidential Young Professor
+                </span>
+              </div>
             </div>
 
             <p className="font-[family-name:var(--font-inter)] font-light text-[15px] text-[var(--ink-dim)] leading-[1.85] mb-5">
-              Prof. Andrew B. Wong is an Assistant Professor in the Department of Materials Science and Engineering at the National University of Singapore. His research sits at the intersection of electrochemistry and materials synthesis, with a focus on developing novel routes for electrochemical CO₂ conversion and sustainable energy materials.
+              Prof. Andrew B. Wong is a Presidential Young Professor and Assistant Professor in the Department of Materials Science and Engineering at the National University of Singapore. His research sits at the intersection of electrochemistry and materials synthesis, with a focus on developing novel routes for electrochemical CO₂ conversion and sustainable energy materials.
             </p>
             <p className="font-[family-name:var(--font-inter)] font-light text-[15px] text-[var(--ink-dim)] leading-[1.85] mb-10">
               He received his PhD from UC Berkeley and completed postdoctoral training before joining NUS in 2021. His group combines expertise in rational material synthesis, electrocatalysis, and device engineering.
@@ -138,7 +144,7 @@ export default function PeopleContent() {
               {[
                 { label: "Affiliation", val: "NUS, Dept. of MSE" },
                 { label: "PhD", val: "UC Berkeley" },
-                { label: "Joined NUS", val: "2021" },
+                { label: "Award", val: "Presidential Young Professor" },
               ].map(({ label, val }) => (
                 <div key={label}>
                   <div className="font-[family-name:var(--font-inter)] font-medium text-[9px] text-[var(--gold)] tracking-[0.15em] uppercase mb-1.5">
