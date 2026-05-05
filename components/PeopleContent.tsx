@@ -77,10 +77,10 @@ export default function PeopleContent() {
 
       {/* ── PI Section ────────────────────────────────────────────────────── */}
       <section className="border-b border-[var(--border)]">
-        <div className="grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
+        <div className="grid" style={{ gridTemplateColumns: "420px 1fr" }}>
 
-          {/* Photo panel — dark */}
-          <div className="relative bg-[var(--hero-bg)] min-h-[600px] overflow-hidden">
+          {/* Photo panel — natural portrait height, no cropping */}
+          <div className="relative bg-[var(--hero-bg)] overflow-hidden self-stretch">
             {/* Noise */}
             <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
               <filter id="pin">
@@ -90,20 +90,21 @@ export default function PeopleContent() {
               <rect width="100%" height="100%" filter="url(#pin)"/>
             </svg>
             {/* Gold glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgba(138,106,42,0.1)_0%,transparent_65%)]"/>
-            {/* Photo */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(138,106,42,0.1)_0%,transparent_65%)] pointer-events-none"/>
+            {/* Photo — rendered at natural portrait ratio, full image visible */}
             <Image
               src="/prof-wong.png"
               alt="Prof. Andrew B. Wong"
-              fill
-              className="object-cover object-top"
+              width={0}
+              height={0}
+              sizes="420px"
+              className="w-full h-auto block"
               priority
             />
-            {/* Gradient overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[rgba(10,9,8,0.85)] to-transparent"/>
-            {/* Name overlay */}
-            <div className="absolute bottom-0 left-0 right-0 px-10 py-8">
-              <div className="font-[family-name:var(--font-playfair)] font-medium text-[28px] text-white leading-none mb-2">
+            {/* Gradient + name overlay pinned to bottom of image */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[rgba(10,9,8,0.92)] to-transparent"/>
+            <div className="absolute bottom-0 left-0 right-0 px-8 py-7">
+              <div className="font-[family-name:var(--font-playfair)] font-medium text-[24px] text-white leading-none mb-2">
                 Prof. Andrew B. Wong
               </div>
               <div className="font-[family-name:var(--font-inter)] text-[10px] text-[rgba(200,170,100,0.85)] tracking-[0.18em] uppercase">
