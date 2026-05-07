@@ -14,21 +14,20 @@ export default function OpenPositionsContent() {
         <SectionHeader label="Careers" title="Open" accent="Positions" />
 
         <p className="font-[family-name:var(--font-inter)] font-light text-[16px] text-[var(--ink-dim)] leading-[1.75] max-w-[600px] mb-[72px]">
-          We seek motivated researchers at all levels. Interested in joining? Reach out even if you don't see your
+          We seek motivated researchers at every level. Interested in joining? Reach out even if you don&apos;t see your
           exact role listed.
         </p>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col -mx-6">
           {POSITIONS.map((pos, i) => (
             <div
               key={i}
               onMouseEnter={() => setHov(i)}
               onMouseLeave={() => setHov(null)}
-              className="grid gap-12 items-center py-10 border-b border-[var(--border)] transition-all duration-200"
+              className="grid gap-12 items-center px-6 py-10 border-b border-[var(--border)] transition-colors duration-200"
               style={{
                 gridTemplateColumns: "100px 1fr auto",
-                paddingLeft: hov === i ? 20 : 0,
-                borderLeft: hov === i ? "2px solid var(--gold)" : "2px solid transparent",
+                background: hov === i ? "var(--off-cream)" : "transparent",
               }}
             >
               <div

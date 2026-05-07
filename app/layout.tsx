@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "A.B. Wong Group — NUS",
+  title: "A.B. Wong Group · NUS",
   description:
     "Advancing electrochemical CO₂ conversion and sustainable energy materials through rational synthesis and novel catalyst design at NUS.",
 };

@@ -5,7 +5,7 @@ export const RESEARCH = [
     title: "CO₂ Reduction\nin Molten Salt",
     tag: "High-Temp Electrocatalysis",
     num: "01",
-    body: "Electrochemical CO₂ conversion at high temperatures in molten salt electrolyte systems — bypassing hydrogen evolution competition and opening new pathways unavailable at ambient conditions.",
+    body: "Electrochemical CO₂ conversion at high temperatures in molten salt electrolyte systems, bypassing hydrogen evolution competition and opening new pathways unavailable at ambient conditions.",
     bullets: ["Avoids HER competition", "New reaction pathways", "High-temperature advantages"],
   },
   {
@@ -14,7 +14,7 @@ export const RESEARCH = [
     title: "Microenvironment\nEngineering",
     tag: "Catalyst Design",
     num: "02",
-    body: "Designing the catalyst microenvironment — controlling species transport, local CO₂/CO availability, and local pH — to unlock new design rules for electrochemical CO₂ conversion.",
+    body: "Designing the catalyst microenvironment (controlling species transport, local CO₂/CO availability, and local pH) to unlock new design rules for electrochemical CO₂ conversion.",
     bullets: ["Species transport control", "Local pH engineering", "Selectivity by design"],
   },
   {
@@ -23,7 +23,7 @@ export const RESEARCH = [
     title: "Hybrid\nBiotic–Abiotic",
     tag: "Bioelectrocatalysis",
     num: "03",
-    body: "Pairing biological selectivity with electrochemical current density to tackle challenging reactions like N₂ reduction — best-of-both-worlds systems for sustainable chemistry.",
+    body: "Pairing biological selectivity with electrochemical current density to tackle challenging reactions like N₂ reduction. Best-of-both-worlds systems for sustainable chemistry.",
     bullets: ["N₂ reduction selectivity", "Biotic–abiotic interface", "Beyond pure electrochemistry"],
   },
   {
@@ -32,7 +32,7 @@ export const RESEARCH = [
     title: "Perovskite-Inspired\nMaterials",
     tag: "Materials Discovery",
     num: "04",
-    body: "Developing new lead-free ionic semiconductors with defect-tolerant characteristics, inspired by the transformative decade of halide perovskite research.",
+    body: "Developing new lead-free ionic semiconductors with defect-tolerant characteristics, drawing on a decade of halide perovskite research.",
     bullets: ["Lead-free formulations", "Defect tolerance", "Next-gen semiconductors"],
   },
 ];
@@ -49,7 +49,7 @@ export const PUBS = [
 export const NEWS = [
   { date: "Mar 2025", title: "NRF Investigatorship Awarded", body: "Prof. Wong receives the prestigious NRF Investigatorship for electrochemical CO₂ reduction research." },
   { date: "Jan 2025", title: "New Paper Accepted in JACS", body: "Our latest work on molten salt electrocatalysis accepted in the Journal of the American Chemical Society." },
-  { date: "Nov 2024", title: "ECS Meeting 2024", body: "Group members presented cutting-edge results at the Electrochemical Society Meeting in Chicago." },
+  { date: "Nov 2024", title: "ECS Meeting 2024", body: "Group members presented new results at the Electrochemical Society Meeting in Chicago." },
   { date: "Aug 2024", title: "New PhD Students Joined", body: "Three new PhD students join the group to work on CO₂ conversion and perovskite materials." },
 ];
 
@@ -118,17 +118,17 @@ export const ALUMNI = [
 export const POSITIONS = [
   {
     type: "PhD",
-    title: "PhD Student — CO₂ Electroreduction",
+    title: "PhD Student: CO₂ Electroreduction",
     desc: "Push the frontiers of CO₂ conversion in molten salt and ambient-condition systems. Strong background in electrochemistry or materials science preferred.",
   },
   {
     type: "Postdoc",
-    title: "Postdoctoral Researcher — Materials Synthesis",
+    title: "Postdoctoral Researcher: Materials Synthesis",
     desc: "Lead synthesis of novel perovskite-inspired ionic semiconductors. PhD in chemistry, materials, or related field required.",
   },
   {
     type: "RA",
-    title: "Research Assistant — Electrochemistry Lab",
+    title: "Research Assistant: Electrochemistry Lab",
     desc: "Support experimental work across multiple projects in our electrochemistry laboratory.",
   },
 ];

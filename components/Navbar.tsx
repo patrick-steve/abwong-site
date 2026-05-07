@@ -26,10 +26,10 @@ export default function Navbar() {
   }, []);
 
   const navBg = scrolled
-    ? "bg-[rgba(245,244,240,0.97)] backdrop-blur-xl border-b border-[var(--border)]"
+    ? "bg-[var(--cream)] border-b border-[var(--border)]"
     : isHome
     ? "bg-transparent"
-    : "bg-[rgba(245,244,240,0.97)] backdrop-blur-xl border-b border-[var(--border)]";
+    : "bg-[var(--cream)] border-b border-[var(--border)]";
 
   const linkColor = (href: string) => {
     const active = pathname === href;

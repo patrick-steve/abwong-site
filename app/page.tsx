@@ -111,12 +111,12 @@ export default function HomePage() {
               All News <span>→</span>
             </Link>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col -mx-5">
             {NEWS.slice(0, 3).map((n, i) => (
               <Link
                 key={i}
                 href="/news"
-                className="grid gap-8 py-6 border-b border-[var(--border)] no-underline cursor-pointer hover:pl-4 hover:border-l-2 hover:border-l-[var(--gold)] transition-all"
+                className="grid gap-8 px-5 py-6 border-b border-[var(--border)] no-underline cursor-pointer hover:bg-[var(--off-cream)] transition-colors duration-200"
                 style={{ gridTemplateColumns: "100px 1fr" }}
               >
                 <span className="font-[family-name:var(--font-inter)] text-[11px] text-[var(--gold)] tracking-[0.08em] pt-[3px]">
@@ -144,8 +144,8 @@ export default function HomePage() {
         <div>
           <SectionHeader label="Get In Touch" title="Join the" accent="Group" />
           <p className="font-[family-name:var(--font-inter)] font-light text-[16px] text-[var(--ink-dim)] leading-[1.75] max-w-[480px]">
-            We are always seeking motivated researchers at all levels — PhD students, postdocs, and research assistants
-            — to join our team.
+            We are always seeking motivated researchers at every level: PhD students, postdocs, and research assistants
+            looking to join a serious electrochemistry lab.
           </p>
         </div>
         <div className="flex flex-col gap-4 justify-self-end">

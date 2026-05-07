@@ -15,14 +15,9 @@ function MemberCard({
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      className="relative flex flex-col p-8 border border-[var(--border)] transition-all duration-300 overflow-hidden cursor-default"
+      className="relative flex flex-col p-8 border border-[var(--border)] transition-colors duration-300 overflow-hidden cursor-default"
       style={{ background: hov ? "var(--surface)" : "var(--cream)" }}
     >
-      {/* Gold left accent bar */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-0.5 bg-[var(--gold)] transition-transform duration-300 origin-top"
-        style={{ transform: hov ? "scaleY(1)" : "scaleY(0)" }}
-      />
       {/* Initials box */}
       <div
         className="w-12 h-12 border flex items-center justify-center mb-6 transition-colors duration-300 shrink-0"
@@ -64,7 +59,7 @@ function GroupLabel({ label, count }: { label: string; count: number }) {
         {label}
       </span>
       <span className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.1em]">
-        — {count}
+        · {count}
       </span>
       <div className="flex-1 h-px bg-[var(--border)]" />
     </div>
@@ -237,7 +232,7 @@ export default function PeopleContent() {
                 {group}
               </div>
               <div className="flex flex-col gap-0">
-                {members.map((m, i) => (
+                {members.map((m) => (
                   <div
                     key={m.name}
                     className="flex justify-between items-baseline py-3.5 border-b border-[var(--border)] gap-4"

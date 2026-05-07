@@ -14,6 +14,10 @@
   --gold-faint: rgba(138, 106, 42, 0.1);
   --hero-bg: #141210;
   --hero-surface: #1e1b17;
+  --lit-brass: #c8aa64;
+  --lit-brass-soft: rgba(200, 170, 100, 0.85);
+  --lit-brass-dim: rgba(200, 170, 100, 0.4);
+  --lit-brass-faint: rgba(200, 170, 100, 0.12);
 }
 
 @theme inline {
@@ -61,6 +65,13 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-bright); }
 
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+
 .animate-ticker {
   animation: ticker 40s linear infinite;
 }
@@ -71,4 +82,18 @@ html, body {
 
 .animate-rotate-slow {
   animation: rotateSlow 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-breathe,
+  .animate-rotate-slow {
+    animation: none;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }

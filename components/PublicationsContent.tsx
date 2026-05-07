@@ -29,11 +29,10 @@ export default function PublicationsContent() {
                   key={key}
                   onMouseEnter={() => setHov(key)}
                   onMouseLeave={() => setHov(null)}
-                  className="grid gap-10 items-center py-7 border-b border-[var(--border)] cursor-pointer transition-all duration-200"
+                  className="grid gap-10 items-center px-6 -mx-6 py-7 border-b border-[var(--border)] cursor-pointer transition-colors duration-200"
                   style={{
                     gridTemplateColumns: "1fr auto",
-                    paddingLeft: hov === key ? 20 : 0,
-                    borderLeft: hov === key ? "2px solid var(--gold)" : "2px solid transparent",
+                    background: hov === key ? "var(--off-cream)" : "transparent",
                   }}
                 >
                   <div>

@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-08T00:00:00Z",
+  "title": "Design System: A.B. Wong Group",
+  "extensions": {
+    "colorMeta": {
+      "manuscript-cream": {
+        "role": "neutral",
+        "displayName": "Manuscript Cream",
+        "canonical": "oklch(96% 0.005 80)",
+        "tonalRamp": ["#1a1815", "#2c2925", "#454138", "#6b6557", "#94907f", "#bdb8a6", "#d9d4c5", "#f5f4f0"]
+      },
+      "page-cream": {
+        "role": "neutral",
+        "displayName": "Page Cream",
+        "canonical": "oklch(94% 0.004 75)",
+        "tonalRamp": ["#1a1916", "#2c2a26", "#45413a", "#6b6659", "#94908a", "#bdb8b0", "#d8d4ce", "#eeecea"]
+      },
+      "surface-stone": {
+        "role": "neutral",
+        "displayName": "Surface Stone",
+        "canonical": "oklch(90% 0.006 75)",
+        "tonalRamp": ["#1a1916", "#2c2a26", "#45413a", "#6b665b", "#94908a", "#b8b3a8", "#d0ccc1", "#e6e3de"]
+      },
+      "bitumen-ink": {
+        "role": "neutral",
+        "displayName": "Bitumen Ink",
+        "canonical": "oklch(15% 0.005 60)",
+        "tonalRamp": ["#0a0908", "#141210", "#1e1b17", "#2a2620", "#3d382f", "#5a5347", "#7c7565", "#9c9485"]
+      },
+      "patinated-brass": {
+        "role": "primary",
+        "displayName": "Patinated Brass",
+        "canonical": "oklch(48% 0.07 76)",
+        "tonalRamp": ["#1a1408", "#2e2412", "#473820", "#604a2c", "#8a6a2a", "#a88436", "#c8a558", "#e0c889"]
+      },
+      "lit-brass": {
+        "role": "primary",
+        "displayName": "Lit Brass",
+        "canonical": "oklch(74% 0.09 78)",
+        "tonalRamp": ["#2e2412", "#473820", "#604a2c", "#8a6a2a", "#a88436", "#c8aa64", "#dcc488", "#ecdcb0"]
+      },
+      "furnace-black": {
+        "role": "neutral",
+        "displayName": "Furnace Black",
+        "canonical": "oklch(15% 0.005 60)",
+        "tonalRamp": ["#080706", "#0e0c0a", "#141210", "#1a1712", "#1e1b17", "#2a2620", "#3d382f", "#5a5347"]
+      },
+      "furnace-surface": {
+        "role": "neutral",
+        "displayName": "Furnace Surface",
+        "canonical": "oklch(20% 0.005 60)",
+        "tonalRamp": ["#0e0c0a", "#141210", "#1a1712", "#1e1b17", "#2a2620", "#3d382f", "#5a5347", "#7c7565"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero h1 only. One per page. Used over Furnace Black to define a surface moment." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2 via SectionHeader. Carries the italic-in-brass accent word." },
+      "title": { "displayName": "Title", "purpose": "List-row titles, card titles, member names." },
+      "body": { "displayName": "Body", "purpose": "Inter Light paragraph copy. Long line-height; max ~70ch." },
+      "label": { "displayName": "Eyebrow Label", "purpose": "Map-key voice. Always preceded by a 32px Patinated Brass dash." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "transition-default", "value": "200ms ease-out", "purpose": "Color, border, and tone transitions on hover." },
+      { "name": "transition-tile", "value": "300ms ease-out", "purpose": "Research-tile background tone shift and brass top-bar scaleX." },
+      { "name": "ticker", "value": "40s linear infinite", "purpose": "Marquee strip of research keywords below the hero." },
+      { "name": "breathe", "value": "2.5s ease-in-out infinite", "purpose": "Status dot and gold-glow opacity pulse on dark surfaces." },
+      { "name": "rotate-slow", "value": "20s linear infinite", "purpose": "Rare decorative use; not used on critical UI." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (cream surface)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid Patinated Brass on Manuscript Cream. The single primary CTA per surface.",
+      "html": "<button class=\"ds-btn-primary\">Open Positions</button>",
+      "css": ".ds-btn-primary { background: #8a6a2a; color: #f5f4f0; padding: 18px 48px; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; border: none; border-radius: 0; cursor: pointer; transition: background-color 200ms ease-out; } .ds-btn-primary:hover { background: #141210; } .ds-btn-primary:focus-visible { outline: 2px solid #8a6a2a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button (cream surface)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent with a hairline-bright border. Pairs with the primary as the secondary action.",
+      "html": "<button class=\"ds-btn-ghost\">Contact Us</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #141210; padding: 18px 48px; font-family: Inter, system-ui, sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(20, 18, 16, 0.22); border-radius: 0; cursor: pointer; transition: border-color 200ms ease-out; } .ds-btn-ghost:hover { border-color: #141210; } .ds-btn-ghost:focus-visible { outline: 2px solid #8a6a2a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Hero Primary Button (dark surface)",
+      "kind": "button",
+      "refersTo": "button-hero-primary",
+      "description": "Paper White on Furnace Black. Hero-only.",
+      "html": "<button class=\"ds-btn-hero-primary\">Explore Research</button>",
+      "css": ".ds-btn-hero-primary { background: #ffffff; color: #141210; padding: 14px 36px; font-family: Inter, system-ui, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 0; cursor: pointer; transition: background-color 200ms ease-out; } .ds-btn-hero-primary:hover { background: #e8e6e0; } .ds-btn-hero-primary:focus-visible { outline: 2px solid #c8aa64; outline-offset: 3px; }"
+    },
+    {
+      "name": "Hero Ghost Button (dark surface)",
+      "kind": "button",
+      "refersTo": "button-hero-ghost",
+      "description": "Transparent over dark, white-25% border, lifts to white on hover.",
+      "html": "<button class=\"ds-btn-hero-ghost\">Meet the Team</button>",
+      "css": ".ds-btn-hero-ghost { background: transparent; color: rgba(255, 255, 255, 0.8); padding: 14px 36px; font-family: Inter, system-ui, sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 0; cursor: pointer; transition: color 200ms ease-out, border-color 200ms ease-out; } .ds-btn-hero-ghost:hover { color: #ffffff; border-color: rgba(255, 255, 255, 0.6); } .ds-btn-hero-ghost:focus-visible { outline: 2px solid #c8aa64; outline-offset: 3px; }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "refersTo": "eyebrow",
+      "description": "The map-key voice. The most-repeated atomic primitive; precedes every section header, credential row, and metadata block.",
+      "html": "<div class=\"ds-eyebrow\"><span class=\"ds-eyebrow-dash\"></span><span class=\"ds-eyebrow-text\">Principal Investigator · NUS Dept. of MSE</span></div>",
+      "css": ".ds-eyebrow { display: inline-flex; align-items: center; gap: 14px; } .ds-eyebrow-dash { width: 32px; height: 1px; background: #8a6a2a; flex-shrink: 0; } .ds-eyebrow-text { font-family: Inter, system-ui, sans-serif; font-weight: 500; font-size: 10px; color: #8a6a2a; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.2; }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "section-header",
+      "description": "Eyebrow + Playfair headline with optional italic-in-brass accent on a new line. Signature opening for every section.",
+      "html": "<div class=\"ds-section-header\"><div class=\"ds-eyebrow\"><span class=\"ds-eyebrow-dash\"></span><span class=\"ds-eyebrow-text\">Updates</span></div><h2 class=\"ds-section-title\">Latest<br><em class=\"ds-section-accent\">News</em></h2></div>",
+      "css": ".ds-section-header { margin-bottom: 64px; } .ds-section-header .ds-eyebrow { margin-bottom: 20px; } .ds-section-title { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4.5vw, 64px); line-height: 1.05; letter-spacing: -0.01em; color: #141210; margin: 0; } .ds-section-accent { font-style: italic; font-weight: 400; color: #8a6a2a; }"
+    },
+    {
+      "name": "List Row (News / Publications / Positions)",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "Three-column row with leading metadata, title + body, trailing affordance. Hover uses tonal background shift, never a side stripe.",
+      "html": "<a class=\"ds-list-row\" href=\"#\"><span class=\"ds-list-meta\">Mar 2025</span><div class=\"ds-list-body\"><div class=\"ds-list-title\">NRF Investigatorship Awarded</div><div class=\"ds-list-sub\">Prof. Wong receives the prestigious NRF Investigatorship for electrochemical CO₂ reduction research.</div></div><span class=\"ds-list-arrow\">→</span></a>",
+      "css": ".ds-list-row { display: grid; grid-template-columns: 140px 1fr 40px; align-items: center; gap: 48px; padding: 36px 24px; border-bottom: 1px solid rgba(20, 18, 16, 0.1); text-decoration: none; color: inherit; transition: background-color 200ms ease-out; } .ds-list-row:hover { background: #eeecea; } .ds-list-row:focus-visible { outline: 2px solid #8a6a2a; outline-offset: -2px; } .ds-list-meta { font-family: Inter, system-ui, sans-serif; font-size: 11px; color: #8a6a2a; letter-spacing: 0.1em; } .ds-list-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; color: #141210; line-height: 1; margin-bottom: 8px; letter-spacing: 0.02em; } .ds-list-sub { font-family: Inter, system-ui, sans-serif; font-weight: 300; font-size: 14px; color: rgba(20, 18, 16, 0.55); line-height: 1.65; } .ds-list-arrow { width: 40px; height: 40px; border: 1px solid rgba(20, 18, 16, 0.1); display: flex; align-items: center; justify-content: center; font-family: Inter, system-ui, sans-serif; font-size: 16px; color: rgba(20, 18, 16, 0.55); transition: color 200ms ease-out, border-color 200ms ease-out; } .ds-list-row:hover .ds-list-arrow { color: #8a6a2a; border-color: #8a6a2a; }"
+    },
+    {
+      "name": "Member Card",
+      "kind": "card",
+      "refersTo": "member-card",
+      "description": "Hairline border on cream. Hover shifts background to Surface Stone and brass-colors the initials box. No left scale-y stripe.",
+      "html": "<article class=\"ds-member-card\"><div class=\"ds-member-init\"><span>YH</span></div><div class=\"ds-member-name\">Yukun HU</div><div class=\"ds-member-sub\">M.S. Beihang University, China</div><div class=\"ds-member-focus\">CO₂ reduction</div><div class=\"ds-member-since\">Since Aug 2021</div></article>",
+      "css": ".ds-member-card { display: flex; flex-direction: column; padding: 32px; background: #f5f4f0; border: 1px solid rgba(20, 18, 16, 0.1); border-radius: 0; transition: background-color 300ms ease-out; } .ds-member-card:hover { background: #e6e3de; } .ds-member-init { width: 48px; height: 48px; border: 1px solid rgba(20, 18, 16, 0.22); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; transition: border-color 300ms ease-out; } .ds-member-init span { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; letter-spacing: 0.05em; color: rgba(20, 18, 16, 0.55); transition: color 300ms ease-out; } .ds-member-card:hover .ds-member-init { border-color: #8a6a2a; } .ds-member-card:hover .ds-member-init span { color: #8a6a2a; } .ds-member-name { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #141210; line-height: 1.2; letter-spacing: 0.01em; margin-bottom: 4px; } .ds-member-sub { font-family: Inter, system-ui, sans-serif; font-weight: 500; font-size: 10px; color: #8a6a2a; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; } .ds-member-focus { font-family: Inter, system-ui, sans-serif; font-weight: 300; font-size: 13px; color: rgba(20, 18, 16, 0.55); line-height: 1.6; flex: 1; margin-bottom: 16px; } .ds-member-since { font-family: Inter, system-ui, sans-serif; font-size: 10px; color: rgba(20, 18, 16, 0.22); letter-spacing: 0.1em; }"
+    },
+    {
+      "name": "Research Tile (dark)",
+      "kind": "card",
+      "refersTo": "research-tile",
+      "description": "Dark editorial tile in a hairline grid. The single allowed scaleX brass top-bar accent.",
+      "html": "<article class=\"ds-research-tile\"><div class=\"ds-research-num\">01</div><h3 class=\"ds-research-title\">CO₂ / Molten Salt</h3><div class=\"ds-research-tag\">High-Temp Electrocatalysis</div></article>",
+      "css": ".ds-research-tile { position: relative; padding: 36px 32px; background: #1a1712; cursor: pointer; overflow: hidden; transition: background-color 300ms ease-out; } .ds-research-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #8a6a2a; transform: scaleX(0); transform-origin: left; transition: transform 300ms ease-out; } .ds-research-tile:hover { background: #1c1a16; } .ds-research-tile:hover::before { transform: scaleX(1); } .ds-research-num { font-family: Inter, system-ui, sans-serif; font-size: 11px; color: rgba(200, 170, 100, 0.8); letter-spacing: 0.1em; margin-bottom: 16px; } .ds-research-title { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #ffffff; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 12px 0; } .ds-research-tag { font-family: Inter, system-ui, sans-serif; font-size: 10px; color: rgba(255, 255, 255, 0.4); letter-spacing: 0.08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Fixed top bar. Solid Manuscript Cream when not over hero (per the No-Glass Rule — replaces the current backdrop-blur translucent treatment). Logo + brand name left; horizontal links right.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"/\"><span class=\"ds-nav-logo\">W</span><span class=\"ds-nav-name\">A.B. Wong Group</span></a><div class=\"ds-nav-links\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"/\">Home</a><a class=\"ds-nav-link\" href=\"/research\">Research</a><a class=\"ds-nav-link\" href=\"/people\">People</a><a class=\"ds-nav-link\" href=\"/publications\">Publications</a></div></nav>",
+      "css": ".ds-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: #f5f4f0; border-bottom: 1px solid rgba(20, 18, 16, 0.1); } .ds-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; } .ds-nav-logo { width: 28px; height: 28px; border: 1px solid #8a6a2a; display: flex; align-items: center; justify-content: center; color: #8a6a2a; font-family: 'Playfair Display', Georgia, serif; font-size: 16px; letter-spacing: 0.05em; } .ds-nav-name { font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 13px; color: #141210; letter-spacing: 0.08em; text-transform: uppercase; } .ds-nav-links { display: flex; align-items: center; } .ds-nav-link { font-family: Inter, system-ui, sans-serif; font-weight: 400; font-size: 12px; color: rgba(20, 18, 16, 0.55); letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 16px; text-decoration: none; transition: color 200ms ease-out; } .ds-nav-link:hover { color: #141210; } .ds-nav-link-active { color: #8a6a2a; } .ds-nav-link:focus-visible { outline: 2px solid #8a6a2a; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lab Atlas",
+    "overview": "The site reads as a navigational document of the lab's territory. Research directions are regions; people are expeditions; publications are the record. The visual language is editorial-cartographic: small uppercase labels function as map keys, the brass accent functions as a coordinate marker, and the dark furnace surfaces act as the deep field where the actual work happens. Cream pages carry the published proceedings.\n\nThe system commits to surfaces, not decoration. A page is either cream (for record) or furnace-dark (for field), and the contrast between them is the site's primary structural move. There is no third surface family. There are no shadows, no rounded corners, no glass, no gradients in text, no decorative chrome between content and reader. Hairline rules and tonal alternation do all the work.\n\nThis system explicitly rejects the corporate-clinical lab aesthetic (white-and-teal press-kit) and the SaaS-startup landing template (gradient hero, bento grid, 'Trusted by' wall). Where there's a choice between safe and committed, the system chooses committed; where there's a choice between decoration and specificity, it chooses specificity. The page should feel like a serious cartographer made it, not a marketing team.",
+    "keyCharacteristics": [
+      "Two-surface system: Manuscript Cream pages and Furnace Black fields, in deliberate alternation.",
+      "Type-led hierarchy: Playfair Display for record, Inter for instrument; the italic-in-brass treatment is the signature emphasis.",
+      "Hairline-only structure: 1px rules carry every division, no shadows or gradients.",
+      "Brass as coordinate: the gold accent marks position, never decorates surface.",
+      "Sharp corners everywhere; the system has no radius vocabulary."
+    ],
+    "rules": [
+      { "name": "The Two-Surface Rule", "body": "Every page is either Manuscript Cream or Furnace Black at any vertical position. There is no third surface family. Tonal layering happens within a family (cream → page-cream → surface-stone, or furnace-black → furnace-surface), never across them.", "section": "colors" },
+      { "name": "The Brass-Marks-Position Rule", "body": "Brass is a marker, not a fill. It appears as a hairline dash before a label, as the italic word inside a Playfair headline, as a 0.5–2px line indicating focus, and as the fill of a single primary CTA per surface. Brass never tints a body of text or fills a card background.", "section": "colors" },
+      { "name": "The 10% Rule, Inverted", "body": "On dark surfaces (Furnace Hall family), Lit Brass is allowed to push to ~15% of the surface (it has to fight more contrast). On cream, brass stays under 8%.", "section": "colors" },
+      { "name": "The Italic-in-Brass Rule", "body": "Every Playfair headline >36px is allowed exactly one italic word, rendered in Patinated Brass on cream or Lit Brass on dark. The italic word breaks to its own line via <br/>. Used intentionally; never decorative.", "section": "typography" },
+      { "name": "The Eyebrow-Dash Rule", "body": "Every uppercase eyebrow label is preceded by a horizontal hairline brass dash (w-8 h-px), separated by a gap-3.5 flex gap. The dash IS the marker; without it the label is naked.", "section": "typography" },
+      { "name": "The Three-Weight Rule", "body": "Inter ships in 300/400/500/600. Body copy uses 300. UI labels use 500. Buttons use 600. There is no 400 body, no 700 anything in Inter; that range belongs to Playfair.", "section": "typography" },
+      { "name": "The Flat-By-Doctrine Rule", "body": "No box-shadow anywhere in the system. If a hover state needs to register, use a 1px hairline appearance, a tonal background shift, or a transformation of an existing decoration (scaleX, scaleY). If those aren't enough, the underlying interaction is wrong.", "section": "elevation" },
+      { "name": "The No-Glass Rule", "body": "No backdrop-filter: blur anywhere. The current Navbar uses backdrop-blur-xl over a translucent cream — this is grandfathered as a Don't and is scheduled for removal in the next polish pass. Solid Manuscript Cream with a hairline bottom border is the correct treatment.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the two-surface rule: every page is either Manuscript Cream or Furnace Black; tonal layering stays inside a family.",
+      "Do lead every uppercase eyebrow with a w-8 h-px Patinated Brass dash and a gap-3.5 flex gap.",
+      "Do render exactly one italic word per Playfair headline ≥36px in Patinated Brass on cream or Lit Brass on dark.",
+      "Do keep all corners sharp: border-radius: 0 is the system's only radius value.",
+      "Do use 1px hairlines (Hairline #1412101a on cream, rgba(255,255,255,0.1) on dark) as the primary divider, not shadows.",
+      "Do use tonal shift (Manuscript Cream → Page Cream, Manuscript Cream → Surface Stone) for hover and active states on rows and cards.",
+      "Do name molecules, methods, mechanisms, the institution, the year. Specificity is the brand.",
+      "Do keep body copy at Inter 300 light, 15–17px, line-height 1.75–1.85, max ~70ch column.",
+      "Do apply filter: grayscale(1) and a 4% Patinated-Brass tint to any third-party embed (maps, iframes).",
+      "Do honor prefers-reduced-motion: ticker, breathe, and rotate-slow animations stop or fade."
+    ],
+    "donts": [
+      "Don't use side-stripe border-left greater than 1px as a hover accent on list rows, cards, or callouts. The current border-left: 2px solid var(--gold) hover on News, Publications, Open Positions, the home news strip, and the Member card is grandfathered as a fix-on-next-polish-pass anti-pattern. Replace with a tonal background shift (Manuscript Cream → Page Cream) or, for cards, a tonal shift plus brass on the initials box.",
+      "Don't use backdrop-filter: blur anywhere. The current Navbar's backdrop-blur-xl and the hero badge's backdrop-blur-sm are scheduled for removal. Solid Manuscript Cream + a hairline bottom border is the correct Navbar; the hero badge becomes a solid Furnace Surface chip with a 1px Lit Brass border.",
+      "Don't use the hero-metric template ('4 / Research Dirs.', '20+ / Publications', '6 / Team Members'). The current hero block is the SaaS-cliché PRODUCT.md anti-references. Replace with a one-line editorial standfirst that names the four research directions in prose, or with the lab's founding-year + institution metadata only.",
+      "Don't use gradient text (background-clip: text on a gradient background). The italic-in-brass rule replaces it for all emphasis.",
+      "Don't use any glassmorphism — no blurred translucent cards, no decorative blur layers.",
+      "Don't introduce a third color family. White-and-teal corporate-biotech palettes, navy-and-gold finance palettes, and SaaS-cream are out of scope by name.",
+      "Don't use a logo wall, a 'Trusted by' strip, a bento grid, or a hero metric block.",
+      "Don't paint the brass into a card background or use it as a surface fill. Brass marks position; it does not fill space.",
+      "Don't soften corners. No border-radius: 4px, no rounded-md, no exceptions.",
+      "Don't use Inter italic. If italic is needed, the moment belongs to Playfair-italic-in-brass. Inter stays roman.",
+      "Don't write 'innovative,' 'cutting-edge,' 'leveraging,' 'world-class,' 'transformative' in any visible UI copy.",
+      "Don't wrap every section in a max-width container. Many sections want to breathe edge-to-edge with internal padding only."
+    ]
+  }
+}
