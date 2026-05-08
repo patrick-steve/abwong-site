@@ -42,3 +42,6 @@ next-env.d.ts
 
 # impeccable live mode local state (config + session journal)
 /.impeccable/live/
+
+# raw asset sources (kept locally; re-encoded into /public for serving)
+/images/

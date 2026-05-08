@@ -5,6 +5,7 @@ import { useRef } from "react";
 import {
   motion,
   useMotionValue,
+  useMotionTemplate,
   useSpring,
   useTransform,
   useReducedMotion,
@@ -36,6 +37,12 @@ export default function Hero() {
   const moleculeX = useTransform(sMouseX, [-1, 1], [-22, 22]);
   const moleculeY = useTransform(sMouseY, [-1, 1], [-18, 18]);
   const moleculeRotate = useTransform(sMouseX, [-1, 1], [-6, 6]);
+
+  // Cursor "lantern" mask: video visible everywhere at ~30%, brightens to ~85% inside a soft
+  // 500px circle around the cursor. Alpha values in the mask gradient drive opacity directly.
+  const maskCX = useTransform(sMouseX, [-1, 1], ["0%", "100%"]);
+  const maskCY = useTransform(sMouseY, [-1, 1], ["0%", "100%"]);
+  const maskImage = useMotionTemplate`radial-gradient(circle 500px at ${maskCX} ${maskCY}, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.85) 25%, rgba(0,0,0,0.32) 100%)`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (reduceMotion) return;
@@ -200,6 +207,38 @@ export default function Hero() {
           style={{ x: glowX, y: glowY }}
           className="absolute right-[20%] top-[30%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(138,106,42,0.06)_0%,transparent_65%)] animate-breathe"
         />
+
+        {/* Molten-salt video — visible everywhere as ambient texture; brightens inside a
+            soft circle following the cursor (mask alpha drives opacity).
+            Reduced motion: static poster, no mask, no autoplay. */}
+        {reduceMotion ? (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img
+              src="/hero/molten-salt.jpg"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover opacity-30 [filter:grayscale(0.7)_brightness(0.6)_contrast(1.15)]"
+            />
+            <div className="absolute inset-0 bg-[rgba(138,106,42,0.06)]" />
+          </div>
+        ) : (
+          <motion.div
+            style={{ maskImage, WebkitMaskImage: maskImage }}
+            className="absolute inset-0 overflow-hidden pointer-events-none"
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/hero/molten-salt.jpg"
+              className="absolute inset-0 w-full h-full object-cover [filter:grayscale(0.7)_brightness(0.6)_contrast(1.15)]"
+            >
+              <source src="/hero/molten-salt.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-[rgba(138,106,42,0.06)]" />
+          </motion.div>
+        )}
 
         {/* Bottom vignette */}
         <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[rgba(10,9,8,0.7)] to-transparent" />

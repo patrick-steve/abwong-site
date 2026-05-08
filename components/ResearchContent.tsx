@@ -1,5 +1,67 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import { RESEARCH } from "@/lib/data";
+
+const VIDEO_BY_ID: Record<string, { mp4: string; poster: string } | undefined> = {
+  co2: { mp4: "/research/co2.mp4", poster: "/research/co2.jpg" },
+  micro: { mp4: "/research/microenv.mp4", poster: "/research/microenv.jpg" },
+  bio: { mp4: "/research/bio.mp4", poster: "/research/bio.jpg" },
+  pero: { mp4: "/research/pero.mp4", poster: "/research/pero.jpg" },
+};
+
+// Hover-to-ignite atmospheric video for a research direction.
+// Default: paused poster. Hover the panel: play. Leave: pause.
+// Reduced motion: poster only, no <video> mounted.
+function ResearchVideo({ id, hovered }: { id: string; hovered: boolean }) {
+  const reduceMotion = useReducedMotion() ?? false;
+  const ref = useRef<HTMLVideoElement>(null);
+  const asset = VIDEO_BY_ID[id];
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const v = ref.current;
+    if (!v) return;
+    if (hovered) v.play().catch(() => {});
+    else v.pause();
+  }, [hovered, reduceMotion]);
+
+  if (!asset) return null;
+
+  if (reduceMotion) {
+    return (
+      <>
+        <img
+          src={asset.poster}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 [filter:grayscale(0.7)_brightness(0.6)_contrast(1.15)] pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-[rgba(138,106,42,0.06)] pointer-events-none" />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <video
+        ref={ref}
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster={asset.poster}
+        className="absolute inset-0 w-full h-full object-cover [filter:grayscale(0.7)_brightness(0.6)_contrast(1.15)] pointer-events-none transition-opacity duration-700"
+        style={{ opacity: hovered ? 0.55 : 0.28 }}
+      >
+        <source src={asset.mp4} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-[rgba(138,106,42,0.06)] pointer-events-none" />
+    </>
+  );
+}
 
 // Unique SVG scientific illustration for each research direction
 function ResearchVisual({ id, num }: { id: string; num: string }) {
@@ -207,6 +269,91 @@ function ResearchVisual({ id, num }: { id: string; num: string }) {
   );
 }
 
+type ResearchItem = (typeof RESEARCH)[number];
+
+function ResearchRow({ r, i }: { r: ResearchItem; i: number }) {
+  const isEven = i % 2 === 0;
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div className="border-b border-[var(--border)]">
+      <div className="grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
+        {/* Visual panel */}
+        <div
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          className={`bg-[var(--hero-bg)] flex items-center justify-center relative overflow-hidden min-h-[560px] ${isEven ? "order-first" : "order-last"}`}
+        >
+          {/* Atmospheric video — deepest layer, hover-to-ignite */}
+          <ResearchVideo id={r.id} hovered={hovered} />
+          {/* Noise */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+            <filter id={`n${i}`}>
+              <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+              <feColorMatrix type="saturate" values="0"/>
+            </filter>
+            <rect width="100%" height="100%" filter={`url(#n${i})`}/>
+          </svg>
+          {/* Gold glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(138,106,42,0.08)_0%,transparent_70%)] pointer-events-none"/>
+          {/* Number watermark */}
+          <span
+            className="absolute font-[family-name:var(--font-playfair)] font-black text-[220px] leading-none select-none pointer-events-none"
+            style={{ color: "rgba(200,170,100,0.035)", bottom: "-20px", right: isEven ? "-10px" : "auto", left: isEven ? "auto" : "-10px" }}
+          >
+            {r.num}
+          </span>
+          {/* SVG illustration — fades back on hover so the video can breathe */}
+          <div
+            className="relative w-full h-full p-10 flex items-center justify-center transition-opacity duration-700 pointer-events-none"
+            style={{ opacity: hovered ? 0.55 : 1 }}
+          >
+            <ResearchVisual id={r.id} num={r.num} />
+          </div>
+          {/* Tag strip at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 px-8 py-4 border-t border-[rgba(200,170,100,0.12)] flex items-center gap-3 bg-[rgba(20,18,16,0.4)] pointer-events-none">
+            <div className="w-4 h-px bg-[rgba(200,170,100,0.5)]"/>
+            <span className="font-[family-name:var(--font-inter)] text-[10px] text-[rgba(200,170,100,0.6)] tracking-[0.18em] uppercase">
+              {r.tag}
+            </span>
+          </div>
+        </div>
+
+        {/* Text panel */}
+        <div className={`px-16 py-20 flex flex-col justify-center ${isEven ? "order-last" : "order-first"}`}>
+          <div className="font-[family-name:var(--font-inter)] text-[11px] text-[var(--gold)] tracking-[0.18em] mb-6">
+            {r.num} <span className="text-[var(--ink-faint)]">/ 04</span>
+          </div>
+          <h2 className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(36px,4vw,60px)] text-[var(--ink)] leading-[1.0] tracking-[-0.01em] mb-6 whitespace-pre-line">
+            {r.title}
+          </h2>
+          <div className="inline-flex self-start border border-[var(--gold-dim)] px-3.5 py-[5px] mb-8">
+            <span className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--gold)] tracking-[0.14em] uppercase">
+              {r.tag}
+            </span>
+          </div>
+          <p className="font-[family-name:var(--font-inter)] font-light text-[16px] text-[var(--ink-dim)] leading-[1.85] mb-10">
+            {r.body}
+          </p>
+          <div className="border-t border-[var(--border)] pt-8">
+            <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.15em] uppercase mb-5">
+              Key Objectives
+            </div>
+            <div className="flex flex-col gap-3">
+              {r.bullets.map((b, j) => (
+                <div key={j} className="flex items-center gap-4">
+                  <div className="w-5 h-px bg-[var(--gold)] shrink-0" />
+                  <span className="font-[family-name:var(--font-inter)] text-[15px] text-[var(--ink)]">{b}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ResearchContent() {
   return (
     <div className="bg-[var(--cream)]">
@@ -221,96 +368,9 @@ export default function ResearchContent() {
         </div>
       </div>
 
-      {/* ── Research sections — alternating layout ── */}
-      {RESEARCH.map((r, i) => {
-        const isEven = i % 2 === 0;
-        return (
-          <div key={r.id} className="border-b border-[var(--border)]">
-            <div
-              className="grid"
-              style={{ gridTemplateColumns: isEven ? "1fr 1fr" : "1fr 1fr" }}
-            >
-              {/* Visual panel */}
-              <div
-                className={`bg-[var(--hero-bg)] flex items-center justify-center relative overflow-hidden min-h-[560px] ${isEven ? "order-first" : "order-last"}`}
-              >
-                {/* Noise */}
-                <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                  <filter id={`n${i}`}>
-                    <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
-                    <feColorMatrix type="saturate" values="0"/>
-                  </filter>
-                  <rect width="100%" height="100%" filter={`url(#n${i})`}/>
-                </svg>
-                {/* Gold glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(138,106,42,0.08)_0%,transparent_70%)]"/>
-                {/* Number watermark */}
-                <span
-                  className="absolute font-[family-name:var(--font-playfair)] font-black text-[220px] leading-none select-none pointer-events-none"
-                  style={{ color: "rgba(200,170,100,0.035)", bottom: "-20px", right: isEven ? "-10px" : "auto", left: isEven ? "auto" : "-10px" }}
-                >
-                  {r.num}
-                </span>
-                {/* SVG illustration */}
-                <div className="relative w-full h-full p-10 flex items-center justify-center">
-                  <ResearchVisual id={r.id} num={r.num} />
-                </div>
-                {/* Tag strip at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 px-8 py-4 border-t border-[rgba(200,170,100,0.12)] flex items-center gap-3">
-                  <div className="w-4 h-px bg-[rgba(200,170,100,0.5)]"/>
-                  <span className="font-[family-name:var(--font-inter)] text-[10px] text-[rgba(200,170,100,0.6)] tracking-[0.18em] uppercase">
-                    {r.tag}
-                  </span>
-                </div>
-              </div>
-
-              {/* Text panel */}
-              <div
-                className={`px-16 py-20 flex flex-col justify-center ${isEven ? "order-last" : "order-first"}`}
-              >
-                {/* Number */}
-                <div className="font-[family-name:var(--font-inter)] text-[11px] text-[var(--gold)] tracking-[0.18em] mb-6">
-                  {r.num} <span className="text-[var(--ink-faint)]">/ 04</span>
-                </div>
-
-                {/* Title */}
-                <h2
-                  className="font-[family-name:var(--font-playfair)] font-medium text-[clamp(36px,4vw,60px)] text-[var(--ink)] leading-[1.0] tracking-[-0.01em] mb-6 whitespace-pre-line"
-                >
-                  {r.title}
-                </h2>
-
-                {/* Tag badge */}
-                <div className="inline-flex self-start border border-[var(--gold-dim)] px-3.5 py-[5px] mb-8">
-                  <span className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--gold)] tracking-[0.14em] uppercase">
-                    {r.tag}
-                  </span>
-                </div>
-
-                {/* Body */}
-                <p className="font-[family-name:var(--font-inter)] font-light text-[16px] text-[var(--ink-dim)] leading-[1.85] mb-10">
-                  {r.body}
-                </p>
-
-                {/* Objectives */}
-                <div className="border-t border-[var(--border)] pt-8">
-                  <div className="font-[family-name:var(--font-inter)] text-[10px] text-[var(--ink-faint)] tracking-[0.15em] uppercase mb-5">
-                    Key Objectives
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {r.bullets.map((b, j) => (
-                      <div key={j} className="flex items-center gap-4">
-                        <div className="w-5 h-px bg-[var(--gold)] shrink-0" />
-                        <span className="font-[family-name:var(--font-inter)] text-[15px] text-[var(--ink)]">{b}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      {RESEARCH.map((r, i) => (
+        <ResearchRow key={r.id} r={r} i={i} />
+      ))}
     </div>
   );
 }
